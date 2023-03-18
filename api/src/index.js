@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const { json } = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config()
+
 
 const app = express();
 
@@ -11,6 +14,9 @@ app.use(cors({
     origin: 'http://localhost:5173',
 
 }));
+
+
+mongoose.connect(process.env.MONGO_URL);
 
 app.get('/test',(req,res)=>{
     res.json('this is the response');
