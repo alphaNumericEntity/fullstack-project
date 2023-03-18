@@ -5,7 +5,7 @@ export default function LoginPage() {
             <form className="max-w-md mx-auto border">
                 <input type="email" placeholder="yur@email.com" />
                 <input type="password" placeholder="password"/>
-                <button>Login</button>
+                <button className="primary">Login</button>
             </form>
 
         </div>
