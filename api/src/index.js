@@ -40,4 +40,27 @@ app.post('/register', async (req,res)=>{
     }
 });
 
+app.post('/login', async (req,res)=>{
+    const {email,password} = req.body;
+
+    try {
+        const user = await UserModel.findOne({
+            email,
+        });
+        if (user) {
+            if (bcryptJs.compareSync(password, user.password)) {
+                res.status(200).json('User logged in successfully');
+            } else {
+                res.status(401).json('Password incorrect');
+            }
+        } else {
+            res.status(401).json('no user with email found');
+        }
+       
+    } catch (e) {
+        res.status(422).json(e);
+    }
+});
+
+
 app.listen(4000);
