@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { json } = require('express');
 const mongoose = require('mongoose');
+const UserModel = require('./models/User');
 require('dotenv').config()
 
 
@@ -24,10 +25,16 @@ app.get('/test',(req,res)=>{
 
 app.post('/register',(req,res)=>{
     const {name,email,password} = req.body;
+
+    UserModel.create({
+        name,
+        email,
+        password,
+    });
     res.json({
         name,
         email,
-        password
+        password,
     });
 });
 
