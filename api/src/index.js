@@ -3,6 +3,7 @@ const cors = require('cors');
 const { json } = require('express');
 const bcryptJs = require('bcryptjs');
 const mongoose = require('mongoose');
+const jwt  = require('jsonwebtoken');
 const UserModel = require('./models/User');
 require('dotenv').config()
 
@@ -17,6 +18,7 @@ app.use(cors({
 }));
 
 const bcryptSalt =  bcryptJs.genSaltSync(10);
+const jwtSecret  =  'sbjasdnHHNBSVBNS62622u891';
 
 
 mongoose.connect(process.env.MONGO_URL);
@@ -49,7 +51,10 @@ app.post('/login', async (req,res)=>{
         });
         if (user) {
             if (bcryptJs.compareSync(password, user.password)) {
-                res.status(200).json('User logged in successfully');
+                jwt.sign({email: user.email, id:user._id}, jwtSecret, {}, (err, token)=> {
+                    if (err) throw err;
+                    res.cookie('token', token).status(200).json('User logged in successfully');
+                });
             } else {
                 res.status(401).json('Password incorrect');
             }

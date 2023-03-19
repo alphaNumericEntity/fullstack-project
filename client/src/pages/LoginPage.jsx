@@ -9,11 +9,17 @@ export default function LoginPage() {
 
     async function loginUser(ev) {
         ev.preventDefault();
-        await axios.post('/login', {
-            email,
-            password,
-        });
+        try {
+                await axios.post('/login', {
+                        email,
+                        password,
+                        });
+                alert("login successful");
+        } catch (e) {
+            alert("Login unsuccessful");
+        }
     } 
+    
     return(
         <div className="mt-4 grow flex items-center justify-around">
             <div className="mb-32">
