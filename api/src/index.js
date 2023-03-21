@@ -53,7 +53,7 @@ app.post('/login', async (req,res)=>{
             if (bcryptJs.compareSync(password, user.password)) {
                 jwt.sign({email: user.email, id:user._id}, jwtSecret, {}, (err, token)=> {
                     if (err) throw err;
-                    res.cookie('token', token).status(200).json('User logged in successfully');
+                    res.cookie('token', token).status(200).json(user);
                 });
             } else {
                 res.status(401).json('Password incorrect');
