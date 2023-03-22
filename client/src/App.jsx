@@ -9,6 +9,7 @@ import { UserContextProvider } from '../src/UserContext'
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
+axios.defaults.timeout = 36000000;//10min
 
 function App() {
 

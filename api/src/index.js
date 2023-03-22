@@ -5,6 +5,8 @@ const bcryptJs = require('bcryptjs');
 const mongoose = require('mongoose');
 const jwt  = require('jsonwebtoken');
 const UserModel = require('./models/User');
+const cookieParser = require('cookie-parser');
+const timeout = require('connect-timeout');
 require('dotenv').config()
 
 
@@ -16,6 +18,12 @@ app.use(cors({
     origin: 'http://localhost:5173',
 
 }));
+app.use(cookieParser());
+//to put this middleaware in final of middleawares
+app.use(timeout(36000000)); //10min
+app.use((req, res, next) => {
+   if (!req.timedout) next();
+});
 
 const bcryptSalt =  bcryptJs.genSaltSync(10);
 const jwtSecret  =  'sbjasdnHHNBSVBNS62622u891';
@@ -64,6 +72,25 @@ app.post('/login', async (req,res)=>{
        
     } catch (e) {
         res.status(422).json(e);
+    }
+});
+
+app.get('/profile', async (req,res)=> {
+
+   
+    const {token} = req.cookies;
+    //res.json({token});
+    if (token) {
+         jwt.verify(token, jwtSecret, {}, async (err,cookieDecrypted) => {
+            
+            if (err) res.send(err);
+            console.log(cookieDecrypted);
+            const {name,email} = await UserModel.findById(cookieDecrypted.id);
+            console.log( {name,email});
+            return res.json({name,email});
+        });
+    } else {
+        return res.json({});
     }
 });
 

@@ -6,7 +6,7 @@ import { UserContext } from "./UserContext";
 
 export default function Header () {
   const {user} = useContext(UserContext);
-  
+
     return (<div>
         <header className="p-4 flex justify-between" >
           <a href="" className='flex items-center gap-1'>
@@ -46,7 +46,7 @@ export default function Header () {
                 <div>
                   {user.name}
                 </div>
-            )};
+            )}
           </Link>
         </header>
        </div>);
