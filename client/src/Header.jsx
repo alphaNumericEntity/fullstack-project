@@ -9,13 +9,13 @@ export default function Header () {
 
     return (<div>
         <header className="p-4 flex justify-between" >
-          <a href="" className='flex items-center gap-1'>
+          <Link to={'/'} className='flex items-center gap-1'>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-9 h-9 -rotate-90">
                    <path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
                 </svg>
                 <span className='font-bold text-xl'> airbnd</span>
     
-          </a>
+          </Link>
     
           <div className='flex gap-2 border border-gray-300 rounded-full py-2 px-8 shadow-md shadow-gray-300'>
             <div>Any where</div>
@@ -31,7 +31,7 @@ export default function Header () {
           </div>
     
     
-          <Link to={'/login'} className="flex items-center  gap-2 border border-gray-300 rounded-full py-2 px-8">
+          <Link to={user?'/account':'/login'} className="flex items-center  gap-2 border border-gray-300 rounded-full py-2 px-8">
             <div className="">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                 <path fill-rule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
