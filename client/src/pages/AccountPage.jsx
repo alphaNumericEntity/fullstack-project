@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
 
 export default function AccountPage() {
@@ -13,7 +13,17 @@ export default function AccountPage() {
         return (<Navigate to='/login'></Navigate>);
     }
 
+    const {subpage} = useParams();
+    console.log(subpage);
+
     return (
-        <div> this is account page for {user.name} </div>
+        <div> 
+            <nav className="w-full flex justify-center mt-8 gap-2">
+                <Link className="py-2 px-6 bg-primary text-white rounded-full" to={'/account'}>My profile</Link>
+                <Link className="py-2 px-6" to={'/account/bookings'}>My bookings</Link>
+                <Link className="py-2 px-6" to={'/account/accommodations'}> My accommodations</Link>
+
+            </nav>
+        </div>
     );
 }
